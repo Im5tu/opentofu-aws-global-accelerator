@@ -3,6 +3,13 @@ resource "aws_globalaccelerator_accelerator" "this" {
   ip_address_type = var.ip_address_type
   enabled         = var.enabled
 
+  lifecycle {
+    precondition {
+      condition     = !var.flow_logs_enabled || (var.flow_logs_s3_bucket != null && var.flow_logs_s3_bucket != "")
+      error_message = "flow_logs_s3_bucket must be set to a non-empty value when flow_logs_enabled is true."
+    }
+  }
+
   dynamic "attributes" {
     for_each = var.flow_logs_enabled ? [1] : []
     content {
@@ -39,7 +46,7 @@ resource "aws_globalaccelerator_listener" "this" {
 resource "aws_globalaccelerator_endpoint_group" "this" {
   for_each = var.endpoint_groups
 
-  listener_arn                  = aws_globalaccelerator_listener.this[each.value.listener_key].id
+  listener_arn                  = aws_globalaccelerator_listener.this[each.value.listener_key].arn
   endpoint_group_region         = each.value.region
   health_check_port             = each.value.health_check_port
   health_check_protocol         = each.value.health_check_protocol
