@@ -1,12 +1,12 @@
-# OpenTofu AWS Module Template
+# OpenTofu AWS Global Accelerator Module
 
-Template repository for creating OpenTofu AWS modules.
+OpenTofu module for creating AWS Global Accelerator resources.
 
 ## Usage
 
 ```hcl
-module "example" {
-  source = "git::https://github.com/im5tu/opentofu-aws-<name>.git?ref=main"
+module "global_accelerator" {
+  source = "git::https://github.com/im5tu/opentofu-aws-global-accelerator.git?ref=main"
 
   tags = {
     Environment = "production"
