@@ -6,7 +6,7 @@ OpenTofu module for creating AWS Global Accelerator with listeners and endpoint 
 
 ```hcl
 module "global_accelerator" {
-  source = "git::https://github.com/im5tu/opentofu-aws-global-accelerator.git?ref=main"
+  source = "git::https://github.com/im5tu/opentofu-aws-global-accelerator.git?ref=9f109a30ace95469786313f6b24c6f5daa6298f2"
 
   name            = "my-accelerator"
   ip_address_type = "IPV4"
